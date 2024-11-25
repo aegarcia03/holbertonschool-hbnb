@@ -47,7 +47,8 @@ class User(Base):
         self.reviews = [] # List to store user-written reviews
 
         # The method will call the setter
-        # self.hash_password(password)
+        self.hash_password(password)
+
     @property
     def first_name(self):
         return self._first_name
@@ -113,3 +114,34 @@ class User(Base):
             self._is_admin = value
         else:
             raise ValueError("is_admin must be a boolean value")
+    
+     # --- Methods ---
+    def save(self):
+        """Update the updated_at timestamp whenever the object is modified"""
+        self.updated_at = datetime.now()
+
+    def add_place(self, place):
+        """Add a place to the user."""
+        self.places.append(place)
+
+    def add_review(self, review):
+        """Add a review to the user."""
+        self.reviews.append(review)
+
+    def hash_password(self, password):
+        """Hashes the password before storing it."""
+        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+    def verify_password(self, password):
+        """Verifies if the provided password matches the hashed password."""
+        return bcrypt.check_password_hash(self.password, password)
+
+    @staticmethod
+    def email_exists(email):
+        """ Search through all Users to check the email exists """
+        # Unused - the facade method get_user_by_email will handle this
+
+    @staticmethod
+    def user_exists(user_id):
+        """ Search through all Users to ensure the specified user_id exists """
+        # Unused - the facade method get_user will handle this

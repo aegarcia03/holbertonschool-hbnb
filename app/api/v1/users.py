@@ -1,4 +1,5 @@
 from flask_restx import Namespace, Resource, fields
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 # from app.services.facade import HBnBFacade
 from app.services import facade
 
@@ -20,10 +21,12 @@ class UserList(Resource):
     @api.response(400, 'Email already registered')
     @api.response(400, 'Invalid input data')
     @api.response(400, 'Setter validation failure')
+    @jwt_required()
     def post(self):
         # curl -X POST "http://127.0.0.1:5000/api/v1/users/" -H "Content-Type: application/json" -d '{"first_name": "John","last_name": "Doe","email": "john.doe@example.com"}'
 
         """Register a new user"""
+        
         user_data = api.payload
 
         # Simulate email uniqueness check (to be replaced by real validation with persistence)
