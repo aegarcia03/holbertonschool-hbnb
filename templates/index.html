@@ -9,13 +9,12 @@
 <body>
     <header>
         <img src="../static/images/logo.png" atl="Logo" class="logo">
-        <a href="login.html" class="login-button">Login</a>
         <nav>
             <ul>
-                <li><a href="/add_review">Add review</a></li>
-                <li><a href="/login" id="login-link">Login</a></li>       
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('login') }}" class="login-button">Login</a></li>
             </ul>
-        </nav>
+        </nav>        
     </header>
     <main>
         <section id="filter">
@@ -23,17 +22,21 @@
             <label for="price-filter">Filter by price</label>
             <select id="price-filter">
                 <!-- Options will be populated dynamically -->
+                <option value="10">Under $10</option>
+                <option value="50">Under $50</option>
+                <option value="100">Under $100</option>
                 <option value="all">All</option>
-                <option value="5000">Under 5000</option>
-                <option value="3000">Under 3000</option>
-                <option value="1000">Under 1000</option>
             </select>
         </section>
         <section id="places-list">
             <!-- List of places will be populated dynamically -->
             {% if places %}
                 {% for place in places %}
-                <p>{{ place.title }}</p>
+                <div class="place-card">
+                    <h3>{{ place.title }}</h3>
+                    <p>Price: ${{ place.price }}</p>
+                    <a href="/place/{{ place.place_id }}" class="details-button">View Details</a>
+                </div>
                 {% endfor %}
             {% else %}
             <p>No places available</p>

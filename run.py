@@ -1,4 +1,4 @@
-
+from app import create_app
 from flask import Flask, render_template
 from flask_restx import Api
 from app.api.v1.users import api as users_ns
@@ -6,7 +6,11 @@ from app.api.v1.amenities import api as amenities_ns
 from app.api.v1.places import api as places_ns
 from app.api.v1.reviews import api as reviews_ns
 from flask_cors import CORS
+from flask import Flask, request, jsonify
+from app.services.facade import HBnBFacade
 import requests
+import os
+from app.models.place import Place
 
 app = Flask(__name__)
 
@@ -28,6 +32,43 @@ def index():
 @app.route('/login')
 def login():
     return render_template('login.html')
+
+@app.route('/place/<place_id>')
+def place_page(place_id):
+    try:
+        place_response = requests.get(f'http://0.0.0.0:5001/api/v1/places/{place_id}')
+        if place_response.status_code == 200:
+            place = place_response.json()
+            print("Fetched place data:", place)
+        else:
+            place = {}
+        
+        reviews_response = requests.get(f'http://0.0.0.0:5001/api/v1/reviews/{place_id}')
+        if reviews_response.status_code == 200:
+            reviews = reviews_response.json()
+        else:
+            reviews = []
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching data: {e}")
+        place = {}
+        reviews = []
+    
+    return render_template('place.html', place=place, reviews=reviews)
+
+@app.route('/add_review/<place_id>')
+def add_review(place_id):
+    try:
+        response = requests.get(f'http://0.0.0.0:5001/api/v1/places/{place_id}')
+        if response.status_code == 200:
+            place = response.json()
+            print("Fetched data:", place)
+        else:
+            place = {}
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching data: {e}")
+        place = {}
+
+    return render_template('add_review.html', place=place)
 
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 api = Api(app, version='1.0', title='HBnB API', description='HBnB Application API', doc='/swagger')

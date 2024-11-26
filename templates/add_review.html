@@ -10,11 +10,10 @@
     <img src="../static/images/logo.png" atl="Logo" class="logo">
     <nav>
         <ul>
-            <a href="./index.html">Home</a>
-            <a href="./place.html">Places</a>
-            <a href="login.html" class="login-button">Login</a>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('login') }}" class="login-button">Login</a></li>
         </ul>
-    </nav>
+    </nav>    
     <main>
         <!-- Add something to idfentify the place you're reviewing -->
         <form id="review-form">
@@ -23,7 +22,11 @@
             <textarea id="review" name="review" required></textarea>
             <label for="rating">Rating:</label>
             <select id="rating" name="rating" required>
-                <!-- Options for rating -->
+                <option value="1">1 Star</option>
+                <option value="2">2 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="5">5 Stars</option>
             </select>
             <button type="submit">Submit Review</button>
         </form>
