@@ -24,7 +24,8 @@
             <p><strong>Price:</strong>{{ place.price }}</p>
             <p><strong>Descripion</strong>{{ place.description }}</p>
         </section>
-        <section id="reviews">
+        <!--Amenities-->
+        <section id="amenities">
             <!-- Reviews will be populated dynamically -->
             <h3>Amenities</h3>
             <ul>
@@ -34,6 +35,7 @@
             </ul>
         </section>
         <section id="reviews">
+            <!--Reviews-->
             {% if place['reviews'] %}
                 {% for review in place['reviews'] %}
                 <div class="review">

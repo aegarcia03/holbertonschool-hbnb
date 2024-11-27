@@ -36,7 +36,8 @@ def login():
 @app.route('/place/<place_id>')
 def place_page(place_id):
     try:
-        place_response = requests.get(f'http://0.0.0.0:5001/api/v1/places/{place_id}')
+        place_url = f'http://0.0.0.0:5001/api/v1/places/{place_id}'
+        place_response = requests.get(place_url)
         if place_response.status_code == 200:
             place = place_response.json()
             print("Fetched place data:", place)
@@ -52,7 +53,10 @@ def place_page(place_id):
         print(f"Error fetching data: {e}")
         place = {}
         reviews = []
-    
+
+    if not place:
+        return render_template('404.html'), 400
+
     return render_template('place.html', place=place, reviews=reviews)
 
 @app.route('/add_review/<place_id>')

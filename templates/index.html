@@ -22,9 +22,9 @@
             <label for="price-filter">Filter by price</label>
             <select id="price-filter">
                 <!-- Options will be populated dynamically -->
-                <option value="10">Under $10</option>
-                <option value="50">Under $50</option>
-                <option value="100">Under $100</option>
+                <option value="10.0">Under $10</option>
+                <option value="50.0">Under $50</option>
+                <option value="100.0">Under $100</option>
                 <option value="all">All</option>
             </select>
         </section>
@@ -33,9 +33,10 @@
             {% if places %}
                 {% for place in places %}
                 <div class="place-card">
+                    <img src="https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg" alt="place image" class="place-image"
                     <h3>{{ place.title }}</h3>
                     <p>Price: ${{ place.price }}</p>
-                    <a href="/place/{{ place.place_id }}" class="details-button">View Details</a>
+                    <a href="{{ url_for('place_page', place_id=place.place_id) }}" class="details-button">View Details</a>
                 </div>
                 {% endfor %}
             {% else %}

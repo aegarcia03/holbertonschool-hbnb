@@ -1,14 +1,16 @@
 document.getElementById('price-filter').addEventListener('change', (event) => {
-    const selectedPrice = event.target.value;
-    const places = document.querySelectorAll(".place-card");
+    const selectedPrice = event.target.value; // Get the selected price range
+    const places = document.querySelectorAll(".place-card"); // Select all place cards
 
     places.forEach(place => {
-        const price = parseInt(place.querySelector('p').textContent.split('$')[1]);
+        const priceElement = place.querySelector('.price'); // Find the price element
+        const price = parseFloat(priceElement.textContent.replace(/[^0-9.]/g, '')); // Extract numeric value
 
-        if (selectedPrice == "all" || price <= parseInt(selectedPrice)) {
-            place.style.display = "block";  // Show the place if it matches filter
+        // Show or hide places based on the filter
+        if (selectedPrice === "all" || price <= parseFloat(selectedPrice)) {
+            place.style.display = "block";  // Show matching places
         } else {
-            place.style.display = "none";  // Hide the place if it doesn't match
+            place.style.display = "none";  // Hide non-matching places
         }
     });
 });

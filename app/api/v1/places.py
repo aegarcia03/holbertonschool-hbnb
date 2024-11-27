@@ -97,17 +97,27 @@ class PlaceList(Resource):
         output = []
 
         for place in all_places:
+            reviews = place.reviews_r
+            if reviews:
+                average = sum([review.rating for review in reviews]) / len(reviews)
+            else:
+                average = "No reviews available"
+
+        for place in all_places:
             output.append({
                 'id': str(place.id),
                 'title': place.title,
+                'price': place.price,
+                'description': place.description,
                 'latitude': place.latitude,
                 'longitude': place.longitude,
+                'average_rating': average
             })
 
         return output, 200
 
 @api.route('/<place_id>')
-class PlaceResource(Resource):
+class PlaceResource(Resource):#
     @api.response(200, 'Place details retrieved successfully')
     @api.response(404, 'Place not found')
     @api.response(404, 'Place owner not found')
@@ -127,10 +137,26 @@ class PlaceResource(Resource):
                 'amenity_id': str(amenity.id),
                 'name': amenity.name
             })
+        reviews_list = []
+        ratings = []
+        for review in place.reviews_r:
+            author = review.author_r
+            reviews_list.append({
+                'review': review.text,
+                'rating': review.rating,
+                'author': f"{author.first_name} {author.last_name}"
+            })
+            ratings.append(review.rating)
+
+        if ratings:
+            average_rating = sum(ratings) / len(ratings)
+        else:
+            average_rating = "Not rated yet"
 
         output = {
             'place_id': str(place.id),
             'title': place.title,
+            'price': place.price,
             'description': place.description,
             'latitude': place.latitude,
             'longitude': place.longitude,
@@ -140,7 +166,9 @@ class PlaceResource(Resource):
                 'last_name': owner.last_name,
                 'email': owner.email
             },
-            'amenities': amenities_list
+            'amenities': amenities_list,
+            'reviews_list': reviews_list,
+            'average_rating': average_rating
         }
         return output, 200
 

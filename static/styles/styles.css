@@ -139,6 +139,13 @@ form button:hover {
     text-align: center;
 }
 
+.place-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
 .place-card h2 {
     margin-bottom: 0.5rem;
     color: #E43D12; /* Red-orange headings */
@@ -146,7 +153,7 @@ form button:hover {
 
 .place-card p {
     margin-bottom: 1rem;
-    font-size: 1rem;
+    font-size: 1rem;s
     color: #141414; /* Charcoal-grey for content */
 }
 
