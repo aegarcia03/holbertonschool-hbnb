@@ -1,9 +1,8 @@
-/* General Reset */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: Tahoma, sans-serif; 
 }
 
 body {
@@ -77,9 +76,58 @@ nav a:hover {
 
 /* Main */
 main {
-    padding: 2rem;
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 1200px; /* Center and limit main content width */
 }
 
+/*Filter Section*/
+
+#filter {
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #EBE9E1; /* Creamy background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#filter h1 {
+    font-size: 2.5rem;
+    color: #E43D12; /* Red-orange title */
+    margin-bottom: 10px;
+    font-family: Tahoma, sans-serif; /* Global font */
+}
+
+.filter-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.filter-wrapper label {
+    font-size: 1.2rem;
+    color: #141414; /* Charcoal-grey */
+    font-weight: bold;
+}
+
+.filter-wrapper select {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #141414; /* Charcoal-grey */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.filter-wrapper select:hover,
+.filter-wrapper select:focus {
+    border-color: #E43D12; /* Red-orange focus */
+    background-color: #f9f9f9;
+}
 /* Forms */
 form {
     background-color: #ffffff; /* White forms */
@@ -129,16 +177,53 @@ form button:hover {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
 }
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 20px; /* Adds space between cards */
+}
 
 .place-card {
     background-color: #ffffff;
-    padding: 10px;
+    width: 325px;
+    overflow: hidden;
     border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 9px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 10px; /* Fallback spacing */
+}
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center title and price */
+    margin-bottom: 1rem;
+}
+
+.card-header h3 {
+    font-size: 1.5rem; /* Larger font for title */
+    color: #E43D12; /* Red-orange for title */
+    margin-bottom: 0.5rem;
+    font-weight: bold;
     text-align: center;
 }
 
+.card-header .price {
+    font-size: 1rem; /* Medium font size for price */
+    color: #141414; /* Charcoal-grey for price */
+    font-weight: 600; /* Slightly bold for emphasis */
+}
+
+.card-header .price span {
+    color: #D6536D; /* Rose for the price amount */
+    font-weight: bold;
+}
 .place-image {
     width: 100%;
     height: auto;
@@ -146,46 +231,40 @@ form button:hover {
     margin-bottom: 15px;
 }
 
-.place-card h2 {
-    margin-bottom: 0.5rem;
-    color: #E43D12; /* Red-orange headings */
+.card-content {
+    padding: 16px;
 }
 
-.place-card p {
-    margin-bottom: 1rem;
-    font-size: 1rem;s
-    color: #141414; /* Charcoal-grey for content */
+.card-content h3 {
+    font-size: 28px;
+    margin-bottom: 8px;
 }
 
-.place-card .details-button {
+.card-content p {
+    color:#141414;
+    font-size: 15px;
+    line-height: 1.3;
+}
+
+.details-button {
     background-color: #D6536D; /* Rose buttons */
     color: #fff;
-    padding: 0.5rem 1rem;
+    padding: 8px 16px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 4px;
     transition: background-color 0.3s ease;
+    margin-top: 16px;
+    display: inline-block;
     font-weight: bold;
 }
 
-.place-card .details-button:hover {
+.details-button:hover {
     background-color: #EFB11D; /* Gold-yellow hover */
 }
 
 /* Place Details */
+
 .place-details {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
-}
-
-.place-details ul {
-    list-style: none;
-    padding: 0;
-}
-
-.place-details ul li {
     background-color: #EBE9E1; /* Light grey for list items */
     margin: 0.5rem 0;
     padding: 0.5rem;
@@ -215,6 +294,90 @@ form button:hover {
 
 .place-item p {
     margin: 0.5rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .place-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.photo-gallery {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+}
+
+.photo-gallery h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #141414;
+    text-align: center;
+}
+
+.photo-layout {
+    display: flex; /* Aligns the main and side photos side by side */
+    gap: 15px;
+    align-items: flex-start; /* Ensures the top edges are aligned */
+}
+.main-photo {
+    flex: 1; /* Makes the main photo take up more space */
+}
+.main-photo img {
+    width: 100%; /* Takes up more space */
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.side-photo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 30%; /* Takes up the remaining space */
+}
+
+.side-photo img {
+    width: 100%; /* Ensures side photos fill their container */
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust place details for better readability */
+#place-details {
+    margin-top: 2rem;
+    text-align: left; /* Align text for better readability */
+}
+
+#place-details  h2 {
+    font-size: 28px;
+    color: #141414; /* Red-orange for titles */
+}
+
+#place-details p {
+    margin-bottom: 10px;
+    color: #333; /* Neutral text color */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #place-details {
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+
+    #place-details h2 {
+        font-size: 22px;
+    }
 }
 
 
@@ -247,14 +410,3 @@ form button:hover {
     background-color: #D6536D; /* Rose hover */
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .place-list {
-        grid-template-columns: 1fr;
-    }
-}

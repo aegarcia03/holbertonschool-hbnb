@@ -10,26 +10,45 @@
     <header>
         <img src="../static/images/logo.png" alt="Logo" class="logo">
         <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="{{ url_for('login') }}" class="login-button">Login</a></li>
-            </ul>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('login') }}" class="login-button">Login</a>
         </nav>        
     </header>
     <main>
+         <!--Photos section-->
+         <section id="property-photos" class="photo-gallery">
+            <h1>{{ place.title }}</h1>
+            <div class="photo-layout">
+                <div class="main-photo">
+                    <img src="https://images.pexels.com/photos/259819/pexels-photo-259819.jpeg" alt="Main place photo">
+                </div>
+                <div class="side-photo">
+                    <img src="https://images.pexels.com/photos/3101547/pexels-photo-3101547.jpeg" alt="side Photo 2">
+                    <img src="https://images.pexels.com/photos/2079451/pexels-photo-2079451.jpeg" alt="Side Photo 3">
+                </div>
+            </div>
+        </section>
+        <!--Place details -->
         <section id="place-details">
-            <!-- Place details will be populated dynamically -->
-            <h2>{{ place.title }}</h2>
-            <p><strong>Host:</strong>{{ place.owner['first_name'] }}</p>
-            <p><strong>Price:</strong>{{ place.price }}</p>
-            <p><strong>Descripion</strong>{{ place.description }}</p>
+            <div>
+                    <!-- Place details will be populated dynamically -->
+                    <h2>{{ place.title }}</h2>
+                    <p><strong>Host: </strong>{{ place.owner['first_name'] }}</p>
+                    <p><strong>Price per night: $</strong>{{ place.price }}</p>
+                    <p><strong>Description: </strong>{{ place.description }}</p>
+                    <p><strong>Longitude: </strong>{{ place.longitude }}</p>
+                    <p><strong>Latitude: </strong>{{ place.latitude }}</p>
+                    <p><strong>Amenities: </strong>{{ place.amenities_list }}</p>
+                    <p><strong>Rating: </strong>{{ place.average_rating }}</p>
+                    <p><strong>Reviews: </strong>{{ place.reviews_list }}</p>
+            </div>
         </section>
         <!--Amenities-->
         <section id="amenities">
             <!-- Reviews will be populated dynamically -->
             <h3>Amenities</h3>
             <ul>
-                {% for amenity in place.amenities}
+                {% for amenity in place.amenities %}
                 <li>{{ amenity }}</li>
                 {% endfor %}
             </ul>
@@ -39,11 +58,14 @@
             {% if place['reviews'] %}
                 {% for review in place['reviews'] %}
                 <div class="review">
+                    <p><strong>Review: </strong>{{ review.text }}</p>
+                    <p><strong>Rating: </strong>{{ review.rating }}</p>
+                    <p>{{ review.author }}</p>
                     <p><strong>{{ review['author'] }}</strong> - Rating: {{ review.rating }}</p>
                     <p>{{ review.text }}</p>
                 </div>
                 {% endfor %}
-            {% else % }
+            {% else %}
             <p>No reviews available</p>
             {% endif %}
         </section>

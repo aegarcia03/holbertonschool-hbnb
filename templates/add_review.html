@@ -9,10 +9,8 @@
 <body>
     <img src="../static/images/logo.png" atl="Logo" class="logo">
     <nav>
-        <ul>
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('login') }}" class="login-button">Login</a></li>
-        </ul>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('login') }}" class="login-button">Login</a>
     </nav>    
     <main>
         <!-- Add something to idfentify the place you're reviewing -->
