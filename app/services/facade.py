@@ -133,6 +133,18 @@ class HBnBFacade:
         if not place:
             return None
         return place.owner_r
+    
+    def link_amenity_to_place(place_id, amenity_id):
+        place = get_place(place_id)
+        amenity = get_amenity(amenity_id)
+        if not place or not amenity:
+            raise ValueError('Place or Amenity not found')
+
+        if amenity in place.amenities:
+            raise ValueError('Amenity already linked to this place')
+
+        place.amenities.append(amenity)
+        save_place(place)  # Persist changes
 
     # --- Reviews ---
     def create_review(self, review_data):

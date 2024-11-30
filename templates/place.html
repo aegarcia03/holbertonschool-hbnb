@@ -38,25 +38,28 @@
                     <p><strong>Description: </strong>{{ place.description }}</p>
                     <p><strong>Longitude: </strong>{{ place.longitude }}</p>
                     <p><strong>Latitude: </strong>{{ place.latitude }}</p>
-                    <p><strong>Amenities: </strong>{{ place.amenities_list }}</p>
                     <p><strong>Rating: </strong>{{ place.average_rating }}</p>
-                    <p><strong>Reviews: </strong>{{ place.reviews_list }}</p>
             </div>
         </section>
         <!--Amenities-->
         <section id="amenities">
             <!-- Reviews will be populated dynamically -->
             <h3>Amenities</h3>
-            <ul>
-                {% for amenity in place.amenities %}
-                <li>{{ amenity }}</li>
-                {% endfor %}
-            </ul>
+            {% if place.amenities %}
+            {% for amenity in place.amenities %}
+              <ul>
+                <li>{{ amenity.name }}</li>
+              </ul>
+              {% endfor %}
+            {% else %}
+              <p>No amenities listed for this place.</p>
+            {% endif %}
         </section>
         <section id="reviews">
             <!--Reviews-->
-            {% if place['reviews'] %}
-                {% for review in place['reviews'] %}
+            <h3>Reviews</h3>
+            {% if place.reviews %}
+                {% for review in place.reviews %}
                 <div class="review">
                     <p><strong>Review: </strong>{{ review.text }}</p>
                     <p><strong>Rating: </strong>{{ review.rating }}</p>
@@ -69,6 +72,7 @@
             <p>No reviews available</p>
             {% endif %}
         </section>
+        <a id="review-btn" href="{{ url_for('add_review', place_id=place['place_id']) }}">Add a review</a>
     </main>
     <script src="scripts.js"></script>
 </body>
