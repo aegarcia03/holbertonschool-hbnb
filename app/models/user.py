@@ -1,7 +1,6 @@
 """ User model """
-
-from app.persistence import Base
 import uuid
+from app.persistence import Base
 import re
 from datetime import datetime
 from flask_bcrypt import Bcrypt
@@ -45,8 +44,6 @@ class User(Base):
         self.is_admin = is_admin
         self.places = [] # List to store user-owned places
         self.reviews = [] # List to store user-written reviews
-
-        # The method will call the setter
         self.hash_password(password)
 
     @property
@@ -69,7 +66,7 @@ class User(Base):
     @last_name.setter
     def last_name(self, value):
         if isinstance(value, str) and 0 < len(value) <= 50:
-                self._last_name = value
+            self._last_name = value
         else:
             raise ValueError(
                 "Last name must be a string with a maximum length of 50 characters"

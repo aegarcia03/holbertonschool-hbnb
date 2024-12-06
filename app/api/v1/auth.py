@@ -16,8 +16,8 @@ class Login(Resource):
     @api.expect(login_model)
     def post(self):
 
-        # curl -X POST "http://127.0.0.1:5000/api/v1/users/" -H "Content-Type: application/json" -d '{ "first_name": "John", "last_name": "Doe", "email": "john.doe@example.com", "password": "cowabunga"}'
-        # curl -X POST "http://127.0.0.1:5000/api/v1/auth/login" -H "Content-Type: application/json" -d '{ "email": "john.doe@example.com", "password": "cowabunga" }'
+        # curl -X POST "http://127.0.0.1:5001/api/v1/users/" -H "Content-Type: application/json" -d '{ "first_name": "John", "last_name": "Doe", "email": "john.doe@example.com", "password": "cowabunga"}'
+        # curl -X POST "http://127.0.0.1:5001/api/v1/auth/login" -H "Content-Type: application/json" -d '{ "email": "john.doe@example.com", "password": "cowabunga" }'
 
         """Authenticate user and return a JWT token"""
         credentials = api.payload  # Get the email and password from the request payload

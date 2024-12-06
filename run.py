@@ -1,18 +1,25 @@
 from app import create_app
 from flask import Flask, render_template
 from flask_restx import Api
+from flask_jwt_extended import JWTManager, create_access_token
 from app.api.v1.users import api as users_ns
 from app.api.v1.amenities import api as amenities_ns
 from app.api.v1.places import api as places_ns
 from app.api.v1.reviews import api as reviews_ns
+from app.api.v1.auth import api as auth_ns
+from app.api.v1.protected import api as protected_ns
 from flask_cors import CORS
 from flask import Flask, request, jsonify
 from app.services.facade import HBnBFacade
 import requests
+from flask import session, redirect, url_for
 import os
-from app.models.place import Place
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY', 'default_secret_key')
+facade = HBnBFacade()
+app.config['JWT_SECRET_KEY'] = 'HolbertonAustralia123'
+jwt = JWTManager(app)
 
 @app.route('/')
 def index():
@@ -29,7 +36,7 @@ def index():
 
     return render_template('index.html', places=places)
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     return render_template('login.html')
 
@@ -81,6 +88,8 @@ api.add_namespace(users_ns, path='/api/v1/users')
 api.add_namespace(amenities_ns, path='/api/v1/amenities')
 api.add_namespace(places_ns, path='/api/v1/places')
 api.add_namespace(reviews_ns, path='/api/v1/reviews')
+api.add_namespace(auth_ns, path='/api/v1/auth')
+api.add_namespace(protected_ns, path='/api/v1/protected')
 
 
 if __name__ == "__main__":

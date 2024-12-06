@@ -12,7 +12,6 @@ user_model = api.model('User', {
     'email': fields.String(required=True, description='Email of the user')
 })
 
-# facade = HBnBFacade()
 
 @api.route('/')
 class UserList(Resource):
@@ -21,12 +20,12 @@ class UserList(Resource):
     @api.response(400, 'Email already registered')
     @api.response(400, 'Invalid input data')
     @api.response(400, 'Setter validation failure')
+    @api.response(403, 'Admin privileges required')
     @jwt_required()
     def post(self):
         # curl -X POST "http://127.0.0.1:5000/api/v1/users/" -H "Content-Type: application/json" -d '{"first_name": "John","last_name": "Doe","email": "john.doe@example.com"}'
+        # Create the user
 
-        """Register a new user"""
-        
         user_data = api.payload
 
         # Simulate email uniqueness check (to be replaced by real validation with persistence)
@@ -81,8 +80,10 @@ class UserResource(Resource):
     @api.response(400, 'Setter validation failure')
     @api.response(404, 'User not found')
     def put(self, user_id):
+        # curl -X PUT "http://127.0.0.1:5000/api/v1/users/<user_id>" -H "Content-Type: application/json" -H "Authorization: Bearer <token_goes_here>" -d '{ "first_name": "Reed", "last_name": "Richards" }'
         """ Update user specified by id """
         user_data = api.payload
+
         wanted_keys_list = ['first_name', 'last_name', 'email']
 
         # Ensure that user_data contains only what we want (e.g. first_name, last_name, email)
