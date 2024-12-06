@@ -409,4 +409,22 @@ form button:hover {
 .add-review:hover {
     background-color: #D6536D; /* Rose hover */
 }
+/* Add a review button styling */
+#review-btn {
+    display: inline-block; /* Makes it look like a button */
+    padding: 10px 20px; /* Adds space inside the button */
+    font-size: 16px; /* Adjusts the text size */
+    font-weight: bold; /* Makes the text bold */
+    color: #fff; /* White text color */
+    background-color: #E43D12; /* Red-orange background */
+    border: none; /* Removes default border */
+    border-radius: 5px; /* Rounded corners */
+    text-align: center; /* Centers the text */
+    text-decoration: none; /* Removes underline */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
 
+#review-btn:hover {
+    background-color: #D6536D; /* Slightly different color on hover */
+}

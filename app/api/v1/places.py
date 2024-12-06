@@ -296,38 +296,3 @@ class PlaceRelations(Resource):
                 }
             }
         return output, 200
-
-@api.route('/places/<place_id>/amenities/')
-class PlaceAmenityLink(Resource):
-    @api.expect(api.model('LinkAmenity', {
-        'amenity_id': fields.String(required=True, description='ID of the amenity to link')
-    }))
-    @api.response(201, 'Amenity successfully linked to the place')
-    @api.response(404, 'Place or Amenity not found')
-    @api.response(400, 'Invalid data')
-    def post(self, place_id):
-        """Link an amenity to a place"""
-        data = api.payload
-        amenity_id = data.get('amenity_id')
-
-        # Validate input
-        if not amenity_id:
-            return {'error': 'Invalid data: amenity_id is required'}, 400
-
-        # Check if place exists
-        place = facade.get_place(place_id)
-        if not place:
-            return {'error': 'Place not found'}, 404
-
-        # Check if amenity exists
-        amenity = facade.get_amenity(amenity_id)
-        if not amenity:
-            return {'error': 'Amenity not found'}, 404
-
-        # Link amenity to place
-        try:
-            facade.link_amenity_to_place(place_id, amenity_id)
-        except ValueError as error:
-            return {'error': str(error)}, 400
-
-        return {'message': 'Amenity successfully linked to the place'}, 201

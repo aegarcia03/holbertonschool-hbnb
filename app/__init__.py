@@ -22,4 +22,7 @@ def create_app():
     api.add_namespace(places_ns, path='/api/v1/places')
     api.add_namespace(reviews_ns, path='/api/v1/reviews')
 
+    app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'  # Use a strong and unique key in production
+    jwt = JWTManager(app)
+
     return app
