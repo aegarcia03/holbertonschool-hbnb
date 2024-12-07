@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const priceFilter = document.getElementById('price-filter');
     const places = document.querySelectorAll('.place-card');
+    const searchBar = document.getElementById('search-bar');
 
     priceFilter.addEventListener('change', (event) => {
         const selectedPrice = event.target.value; // Get selected price
