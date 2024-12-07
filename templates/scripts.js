@@ -1,87 +1,82 @@
-document.addEventListener("DOMContentLoaded", function() {
-   
-    const currentPage = window.location.pathname;
 
-    // Logic for place.html
-    if (currentPage.includes('index.html')) {
-        document.getElementById('price-filter').addEventListener('change', (event) => {
-            const selectedPrice = event.target.value; // Get the selected price range
-            const places = document.querySelectorAll(".place-card"); // Select all place cards
+hbnb = {
+    // storage area for data obtained from API calls
+    "data": {
+        "places": [],
+        "amenities": []
+    },
 
-            places.forEach(place => {
-                const priceElement = place.querySelector('.price span'); // Fix selector for price span
-                const price = parseFloat(priceElement.textContent.replace(/[^0-9.]/g, '')); // Extract numeric value
-
-                // Show or hide places based on the filter
-                if (selectedPrice === "all" || price <= parseFloat(selectedPrice)) {
-                    place.style.display = "block";  // Show matching places
-                } else {
-                    place.style.display = "none";  // Hide non-matching places
-                }
-            });
-        });
-    }
-
-    // Logic for add_review.html
-    if (currentPage.includes('add_review.html')) {
-        // Get Place ID from the URL query string
-        const urlParams = new URLSearchParams(window.location.search);
-        const placeId = urlParams.get('place_id'); // Assuming the URL looks like `?place_id=some-place-id`
-
-        // Review form and message elements
-        const reviewForm = document.getElementById('review-form');
-        const reviewText = document.getElementById('review-text');
-        const messageDiv = document.getElementById('message');
-
-        // Handle form submission
-        reviewForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission behavior
-
-            // Get the review text
-            const review = reviewText.value.trim();
-
-            // Check if review is empty
-            if (!review) {
-                showMessage('Please write a review.', 'error');
-                return;
+    // messages to be displayed in website. e.g. errors, notifications, etc
+    "msg": {
+        "error": {
+            "api": {
+                "generic": "Unable to retrieve API data. Please ensure the server is active.",
             }
-
-            // Prepare data for the POST request
-            const reviewData = {
-                review_text: review,
-                place_id: placeId
-            };
-
-            // Send review data via Fetch API (POST request)
-            fetch(`http://127.0.0.1:5001/api/v1/places/${placeId}/reviews/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(reviewData)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    return response.json().then(err => { throw new Error(err.error || 'Error submitting review'); });
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Display success message and clear form
-                showMessage('Review submitted successfully!', 'success');
-                reviewText.value = ''; // Clear the review text area
-            })
-            .catch(error => {
-                // Display error message
-                showMessage(error.message, 'error');
-            });
-        });
-
-        // Function to display success or error message
-        function showMessage(message, type) {
-            messageDiv.style.display = 'block';
-            messageDiv.textContent = message;
-            messageDiv.style.color = type === 'success' ? 'green' : 'red';
         }
+    },
+
+    showError: function(msg) {
+        document.getElementById("error").innerHTML = msg
+        document.getElementById("error").setAttribute('class', 'show');
+    },
+    hideLoader: function() {
+        document.getElementById("loader").setAttribute('class', 'hide');
+    },
+
+filterPriceOptionsPopulate: function() {
+    let options = [50, 100, 250, 500]
+    let selectElem = document.querySelector("#filter li.price select")
+
+    for (let option of options) {
+        selectElem.innerHTML += `
+            <option value="` + option + `">
+                $` + option.toString() + `
+            </option>
+        `;
     }
-});
+}
+init: function() {
+    const pageId = document.getElementsByTagName('body')[0].getAttribute('page-id')
+
+    hbnb.loggedInStateUpdate();
+    hbnb.logoutInit();
+
+    switch(pageId) {
+        case 'index':
+            // 1. Load data for Amenities + Places
+            hbnb.loadIndexData()
+            .then(() => {
+                // 2. Populate filter with data
+                hbnb.filterAmenityCheckboxesPopulate()
+                hbnb.filterPriceOptionsPopulate()
+
+                // 3. Add Places data to website DOM
+                hbnb.placesPopulate()
+
+                // 4. Prepare the filter
+                hbnb.filterSearchInit()
+            }).catch((e) => {
+                console.error(e)
+            }).finally(() => {
+                // Hide the loader
+                hbnb.hideLoader()
+            })
+            break;
+        case 'login':
+            // TODO:
+            break;
+        case 'place':
+            // TODO:
+            break;
+        case 'add_review':
+            // TODO:
+            break;
+    }
+
+    hbnb.loginModalInit();
+  }
+}
+
+window.onload = function() {
+hbnb.init();
+}
