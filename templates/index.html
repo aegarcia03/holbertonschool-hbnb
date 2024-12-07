@@ -26,8 +26,12 @@
                     <option value="100.0">Under $100</option>
                     <option value="all">All</option>
                 </select>
+                
+                <!-- Adding the search bar -->
+                <label for="search-bar" class="search-label">Search</label>
+                <input type="text" id="search-bar" class="search-bar" placeholder="Search for places...">
             </div>
-        </section>
+        </section>        
         <section id="places-list">
             <!-- List of places will be populated dynamically -->
             {% if places %}

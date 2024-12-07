@@ -122,7 +122,16 @@ main {
     color: #141414; /* Charcoal-grey */
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
+#price-filter, #search-bar {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
+#search-bar {
+    width: 200px;
+}
 .filter-wrapper select:hover,
 .filter-wrapper select:focus {
     border-color: #E43D12; /* Red-orange focus */
