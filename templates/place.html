@@ -58,14 +58,12 @@
         <section id="reviews">
             <!--Reviews-->
             <h3>Reviews</h3>
-            {% if place.reviews %}
-                {% for review in place.reviews %}
+            {% if place['reviews'] %}
+                {% for review in place['reviews'] %}
                 <div class="review">
-                    <p><strong>Review: </strong>{{ review.text }}</p>
-                    <p><strong>Rating: </strong>{{ review.rating }}</p>
-                    <p>{{ review.author }}</p>
-                    <p><strong>{{ review['author'] }}</strong> - Rating: {{ review.rating }}</p>
-                    <p>{{ review.text }}</p>
+                    <p><strong>Review: </strong>{{ review['text'] }}</p>
+                    <p><strong>Rating: </strong>{{ review['rating'] }}</p>
+                    <p>{{ review['author'] }}</p>
                 </div>
                 {% endfor %}
             {% else %}
