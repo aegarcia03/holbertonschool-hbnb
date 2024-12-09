@@ -29,7 +29,7 @@ class Login(Resource):
 
         # Step 2: Check if the user exists and the password is correct
         if not user or not user.verify_password(password):
-            return {'error': 'Invalid credentials'}, 401
+            return {'error': 'Invalid credentials. Please try again.'}, 401
 
         # Step 3: Create a JWT token with the user's id and is_admin flag
         access_token = create_access_token(identity={'id': str(user.id), 'is_admin': user.is_admin})

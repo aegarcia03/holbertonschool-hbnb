@@ -437,3 +437,11 @@ form button:hover {
 #review-btn:hover {
     background-color: #D6536D; /* Slightly different color on hover */
 }
+
+.error-message {
+    color: #ff4d4d;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.2em;
+}

@@ -21,7 +21,7 @@ class UserList(Resource):
     @api.response(400, 'Invalid input data')
     @api.response(400, 'Setter validation failure')
     @api.response(403, 'Admin privileges required')
-    @jwt_required()
+    #@jwt_required()
     def post(self):
         # curl -X POST "http://127.0.0.1:5000/api/v1/users/" -H "Content-Type: application/json" -d '{"first_name": "John","last_name": "Doe","email": "john.doe@example.com"}'
         # Create the user

@@ -39,7 +39,7 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "POST":
-        return redirect(url_for('index')) # Redirect to the index page after login
+        session['login'] = True
     return render_template('login.html')
 
 @app.route('/place/<place_id>')
