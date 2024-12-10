@@ -21,9 +21,9 @@
                 <label for="price-filter">Filter by price</label>
                 <select id="price-filter">
                     <!-- Options will be populated dynamically -->
-                    <option value="10.0">Under $10</option>
-                    <option value="50.0">Under $50</option>
-                    <option value="100.0">Under $100</option>
+                    <option value="1">Under $10</option>
+                    <option value="2">Under $50</option>
+                    <option value="3">Under $100</option>
                     <option value="all">All</option>
                 </select>
                 
@@ -43,7 +43,7 @@
                         <div class="card-header">
                             <h3>{{ place.title }}</h3>
                             <div class="content">
-                                <Price>Price: <span>${{ place.price }}</span></p>
+                                <p>Price: <span>${{ place.price }}</span></p>
                             </div>
                         </div>
                         <a class="details-button" href="{{ url_for('place_page', place_id=place.id) }}" >View Details</a>
