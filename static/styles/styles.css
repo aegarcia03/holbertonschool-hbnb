@@ -1,72 +1,36 @@
+/* General Reset and Base Styles */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Tahoma, sans-serif; 
+    box-sizing: border-box;
+    background-color: #f4f4f4;
 }
 
 body {
-    background-color: #EBE9E1; /* Light grey background */
-    color: #141414; /* Charcoal-grey text */
+    font-family: Arial, sans-serif;
     line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4; /* Cream-white background */
 }
 
-/* Header */
+/* Header Styles (Shared) */
 header {
-    background-color: #EBE9E1; /* Red-orange for the header */
-    color: #fff;
-    padding: 1rem;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    background-color: #f4f4f4; /* Light gray */
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 header .logo {
-    color: #EFB11D; /* Gold-yellow for a subtle connection */
-    font-size: 1.8rem;
-    font-weight: 900;
-    display: flex;
-    align-items: center;
+    height: 50px;
 }
 
-header .logo img {
-    height: 40px;
-    margin-right: 10px;
-}
-
-header .login-button {
-    background-color: #D6536D; /* Rose for buttons */
-    color: #fff;
-    padding: 0.2rem 0.5rem;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    font-weight: bold;
-}
-
-header .login-button:hover {
-    background-color: #E43D12; /* Red-orange hover */
-}
-
-/* Footer */
-footer {
-    background-color: #141414; /* Charcoal-grey footer */
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
-    margin-top: 2rem;
-    font-size: 0.9rem;
-}
-
-/* Navigation */
 nav a {
-    background-color: #D6536D; /* Rose for buttons */
-    color: #fff;
-    padding: 0.2rem 0.5rem;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    margin-left: 20px;
+    color: #e43d12; /* Red-orange */
     font-weight: bold;
 }
 
@@ -74,68 +38,46 @@ nav a:hover {
     text-decoration: underline;
 }
 
-/* Main */
-main {
-    padding: 1rem;
-    margin: 0 auto;
-    max-width: 1200px; /* Center and limit main content width */
-}
-
-/*Filter Section*/
-
-#filter {
+/* Footer Styles (Shared) */
+footer {
     text-align: center;
-    margin: 20px 0;
-    padding: 20px;
-    background-color: #EBE9E1; /* Creamy background */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#filter h1 {
-    font-size: 2.5rem;
-    color: #E43D12; /* Red-orange title */
-    margin-bottom: 10px;
-    font-family: Tahoma, sans-serif; /* Global font */
-}
-
-.filter-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.filter-wrapper label {
-    font-size: 1.2rem;
-    color: #141414; /* Charcoal-grey */
-    font-weight: bold;
-}
-
-.filter-wrapper select {
-    padding: 10px 15px;
-    font-size: 1rem;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    color: #141414; /* Charcoal-grey */
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-#price-filter, #search-bar {
-    padding: 5px;
+    padding: 10px 0;
+    background-color: #f4f4f4;
     font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    color: #fff;
 }
 
-#search-bar {
-    width: 200px;
+/* Button Styles (Shared) */
+a.button,
+button {
+    display: inline-block;
+    background-color: #e43d12; /* Red-orange */
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
 }
-.filter-wrapper select:hover,
-.filter-wrapper select:focus {
-    border-color: #E43D12; /* Red-orange focus */
-    background-color: #f9f9f9;
+
+a.button:hover,
+button:hover {
+    background-color: #d6536d; /* Rose */
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.margin-bottom {
+    margin-bottom: 20px;
+}
+
+.padding {
+    padding: 15px;
 }
 /* Forms */
 form {
@@ -178,270 +120,4 @@ form button {
 
 form button:hover {
     background-color: #D6536D; /* Rose hover */
-}
-
-/* Place List */
-.place-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-.card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    min-height: 100vh;
-    margin: 0 auto;
-    padding: 20px;
-    gap: 20px; /* Adds space between cards */
-}
-
-.place-card {
-    background-color: #ffffff;
-    width: 325px;
-    overflow: hidden;
-    border: 1px solid #ddd;
-    border-radius: 9px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin: 10px; /* Fallback spacing */
-}
-
-.card-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center title and price */
-    margin-bottom: 1rem;
-}
-
-.card-header h3 {
-    font-size: 1.5rem; /* Larger font for title */
-    color: #E43D12; /* Red-orange for title */
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    text-align: center;
-}
-
-.card-header .price {
-    font-size: 1rem; /* Medium font size for price */
-    color: #141414; /* Charcoal-grey for price */
-    font-weight: 600; /* Slightly bold for emphasis */
-}
-
-.card-header .price span {
-    color: #D6536D; /* Rose for the price amount */
-    font-weight: bold;
-}
-.place-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.card-content {
-    padding: 16px;
-}
-
-.card-content h3 {
-    font-size: 28px;
-    margin-bottom: 8px;
-}
-
-.card-content p {
-    color:#141414;
-    font-size: 15px;
-    line-height: 1.3;
-}
-
-.details-button {
-    background-color: #D6536D; /* Rose buttons */
-    color: #fff;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-    margin-top: 16px;
-    display: inline-block;
-    font-weight: bold;
-}
-
-.details-button:hover {
-    background-color: #EFB11D; /* Gold-yellow hover */
-}
-
-/* Place Details */
-
-.place-details {
-    background-color: #EBE9E1; /* Light grey for list items */
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    color: #141414; /* Charcoal-grey text */
-}
-
-#places-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.place-item {
-    background-color: #EBE9E1; /* Light cream */
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: calc(33.33% - 1rem); /* Responsive grid */
-    box-sizing: border-box;
-}
-
-.place-item h2 {
-    color: #E43D12; /* Red-orange */
-}
-
-.place-item p {
-    margin: 0.5rem 0;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .place-list {
-        grid-template-columns: 1fr;
-    }
-}
-
-.photo-gallery {
-    margin: 20px auto;
-    padding: 20px;
-    max-width: 800px;
-}
-
-.photo-gallery h1 {
-    font-size: 28px;
-    margin-bottom: 15px;
-    color: #141414;
-    text-align: center;
-}
-
-.photo-layout {
-    display: flex; /* Aligns the main and side photos side by side */
-    gap: 15px;
-    align-items: flex-start; /* Ensures the top edges are aligned */
-}
-.main-photo {
-    flex: 1; /* Makes the main photo take up more space */
-}
-.main-photo img {
-    width: 100%; /* Takes up more space */
-    height: auto;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.side-photo {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 30%; /* Takes up the remaining space */
-}
-
-.side-photo img {
-    width: 100%; /* Ensures side photos fill their container */
-    height: auto;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Adjust place details for better readability */
-#place-details {
-    margin-top: 2rem;
-    text-align: left; /* Align text for better readability */
-}
-
-#place-details  h2 {
-    font-size: 28px;
-    color: #141414; /* Red-orange for titles */
-}
-
-#place-details p {
-    margin-bottom: 10px;
-    color: #333; /* Neutral text color */
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    #place-details {
-        padding: 1rem;
-        margin-top: 1rem;
-    }
-
-    #place-details h2 {
-        font-size: 22px;
-    }
-}
-
-
-/* Reviews */
-.review-card {
-    background-color: #ffffff;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.review-card p {
-    margin-bottom: 0.5rem;
-    color: #141414; /* Charcoal-grey */
-}
-
-.add-review {
-    display: inline-block;
-    background-color: #EFB11D; /* Gold-yellow */
-    color: #fff;
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.add-review:hover {
-    background-color: #D6536D; /* Rose hover */
-}
-/* Add a review button styling */
-#review-btn {
-    display: inline-block; /* Makes it look like a button */
-    padding: 10px 20px; /* Adds space inside the button */
-    font-size: 16px; /* Adjusts the text size */
-    font-weight: bold; /* Makes the text bold */
-    color: #fff; /* White text color */
-    background-color: #E43D12; /* Red-orange background */
-    border: none; /* Removes default border */
-    border-radius: 5px; /* Rounded corners */
-    text-align: center; /* Centers the text */
-    text-decoration: none; /* Removes underline */
-    cursor: pointer; /* Changes the cursor to a pointer on hover */
-    transition: background-color 0.3s ease; /* Smooth hover effect */
-}
-
-#review-btn:hover {
-    background-color: #D6536D; /* Slightly different color on hover */
-}
-
-.error-message {
-    color: #ff4d4d;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 1.2em;
 }

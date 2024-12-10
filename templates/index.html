@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/styles/styles.css">
+    <link rel="stylesheet" href="../static/styles/index.css">
     <title>HBnB</title>
 </head>
 <body>
@@ -42,7 +42,9 @@
                     <div class="card-content">
                         <div class="card-header">
                             <h3>{{ place.title }}</h3>
-                            <p class="price">Price: <span>${{ place.price }}</span></p>
+                            <div class="content">
+                                <Price>Price: <span>${{ place.price }}</span></p>
+                            </div>
                         </div>
                         <a class="details-button" href="{{ url_for('place_page', place_id=place.id) }}" >View Details</a>
                     </div>

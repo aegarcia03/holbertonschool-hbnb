@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Place Details</title>
-    <link rel="stylesheet" href="../static/styles/styles.css">
+    <link rel="stylesheet" href="../static/styles/place.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -30,32 +31,41 @@
         </section>
         <!--Place details -->
         <section id="place-details">
-            <div>
+            <div class="place-box">
                     <!-- Place details will be populated dynamically -->
-                    <h2>{{ place.title }}</h2>
-                    <p><strong>Host: </strong>{{ place.owner['first_name'] }}</p>
-                    <p><strong>Price per night: $</strong>{{ place.price }}</p>
-                    <p><strong>Description: </strong>{{ place.description }}</p>
-                    <p><strong>Longitude: </strong>{{ place.longitude }}</p>
-                    <p><strong>Latitude: </strong>{{ place.latitude }}</p>
-                    <p><strong>Rating: </strong>{{ place.average_rating }}</p>
+                    <span>
+                        <span>
+                            <i class="fa-solid fa-bed"></i> {{ range(1,5) | random }} bedroom, 
+                            <i class="fa-solid fa-bath"></i> {{ range(1,5) | random }} bath 
+                        </span>
+                    </span>
+                    <p>{{ place.description }}</p>
+                    <p><strong>$ {{ place.price }} AUD </strong>total </p>
             </div>
         </section>
         <!--Amenities-->
         <section id="amenities">
+            <div class="place-box">
             <!-- Reviews will be populated dynamically -->
-            <h3>Amenities</h3>
             {% if place.amenities %}
             {% for amenity in place.amenities %}
               <ul>
-                <li>{{ amenity.name }}</li>
+                <li ><i class="fa-solid fa-hot-tub-person"></i> {{ amenity.name }}</li>
               </ul>
               {% endfor %}
             {% else %}
               <p>No amenities listed for this place.</p>
             {% endif %}
+            </div>
+            <section>
+            <div class="host-photo-wrapper">
+                <p><img src="https://ui-avatars.com/api/?name={{ place.owner['first_name'] }}&background=random" alt="Host photo" class="host-photo">
+                    <strong>Hosted by:  </strong> {{ place.owner['first_name'] }}</p>
+            </div>
+            </section>
         </section>
         <section id="reviews">
+            <div class="place-box">
             <!--Reviews-->
             <h3>Reviews</h3>
             {% if place['reviews'] %}
@@ -69,6 +79,7 @@
             {% else %}
             <p>No reviews available</p>
             {% endif %}
+            </div>
         </section>
         <a id="review-btn" href="{{ url_for('add_review', place_id=place['place_id']) }}">Add a review</a>
     </main>

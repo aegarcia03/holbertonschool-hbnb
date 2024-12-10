@@ -1,0 +1,152 @@
+/* General Styles for place.html */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f4f4;
+    padding: 10px 20px;
+}
+
+header .logo {
+    height: 50px;
+}
+
+nav a {
+    text-decoration: none;
+    margin-left: 20px;
+    color: #333;
+}
+
+main {
+    padding: 20px;
+}
+
+.photo-gallery {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+}
+
+.photo-gallery h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #141414;
+    text-align: center;
+}
+
+.photo-layout {
+    display: flex;
+    gap: 10px; /* Reduces the gap between photos */
+    justify-content: space-between; /* Ensures even spacing */
+    align-items: flex-start; /* Aligns photos at the top */
+}
+.main-photo {
+    flex: 2; /* Makes the main photo take up more space */
+    display: flex;
+    justify-content: center;
+}
+
+.main-photo img {
+    width: 90%; /* Takes up more space */
+    max-width: 600px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.side-photo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.side-photo img {
+    width: 90%; /* Ensures side photos fill their container */
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Place Details Section */
+#place-details .place-box {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#place-details .place-box p {
+    margin: 10px 0;
+}
+
+/* Amenities Section */
+#amenities {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Adds space between the amenities and host photo */
+}
+
+#amenities .place-box ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#amenities .place-box ul li {
+    margin-bottom: 5px;
+}
+
+.host-photo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds space between the photo and any accompanying text */
+}
+
+.host-photo {
+    width: 50px; /* Adjust size of the host photo */
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Review Section */
+#reviews .place-box {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+#reviews .review {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+#review-btn {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    color: #fff;
+    background-color: black;
+}
